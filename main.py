@@ -5,8 +5,10 @@ def main():
     
 def open_list():
     with open("tasks.txt", "r") as file:
-        content = file.readlines()
-        print(content[i] for i in range (len(content)))
+        contents= file.readlines()
+        tasks = [content.strip().capitalize() for content in contents]
+        for i, task in enumerate(tasks):
+            print(f"{i+1}. {task}")
         
         
 main()
