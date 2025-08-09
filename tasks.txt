@@ -1,4 +1,4 @@
 Learn python.
 Learn Pygame.
 Practise typing.
-Make a to-do list. [✔]
+NepalHi
