@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block head %} <title>To Do App</title> {% endblock
+%} {% block body %}
+<div class="content">
+  <h1>To Do App</h1>
+  <table>
+    <tr>
+      <th>Task</th>
+      <th>Added</th>
+      <th>Mark</th>
+      <th>Action</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+      <td>{{ task.content }}</td>
+      <td>{{ task.date_added.date() }}</td>
+      <td>
+        <form
+          method="POST"
+          action="{{ url_for('mark', id=task.id) }}"
+          style="display: inline"
+        >
+          <input
+            type="hidden"
+            name="completed"
+            value="{{ 0 if task.completed else 1 }}"
+          />
+          <input
+            type="checkbox"
+            onChange="this.form.submit()"
+            {%
+            if
+            task.completed
+            %}checked{%
+            endif
+            %}
+          />
+        </form>
+      </td>
+      <td>
+        <a href="/delete/{{ task.id }}"
+          ><input type="button" value="Delete"
+        /></a>
+        <br />
+        <a href="/update/{{ task.id }}"
+          ><input type="button" value="Update"
+        /></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <form action="/" method="POST">
+    <input type="text" name="content" id="content" />
+    <input type="Submit" value="Add Task" />
+  </form>
+</div>
+{% endblock %}
